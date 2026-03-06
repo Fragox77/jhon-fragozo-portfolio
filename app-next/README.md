@@ -6,6 +6,11 @@ Nueva versión del sitio en Next.js + React + TypeScript + Tailwind, sin afectar
 
 URL pública (GitHub Pages): https://comunicaciones2-star.github.io/minifolio/
 
+Con el workflow actual, conviven ambas versiones:
+
+- Sitio legacy (raíz): `https://comunicaciones2-star.github.io/minifolio/`
+- Cotizador Next.js: `https://comunicaciones2-star.github.io/minifolio/cotizador/`
+
 ## Requisitos
 
 - Node.js 20+
