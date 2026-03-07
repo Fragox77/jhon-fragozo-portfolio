@@ -5,6 +5,7 @@ const deploymentBasePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/minifolio").r
 const basePath = isProduction ? deploymentBasePath : "";
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
   output: "export",
   trailingSlash: true,
   outputFileTracingRoot: process.cwd(),
