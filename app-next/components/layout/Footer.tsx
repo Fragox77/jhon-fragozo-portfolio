@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import Logo from "@/components/layout/Logo";
 import { footerNavigation } from "@/lib/constants/navigation";
 import { siteContent } from "@/lib/content/siteContent";
+import { brand } from "@/lib/constants/brand";
 
 export function Footer() {
   return (
