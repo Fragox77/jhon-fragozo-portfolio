@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils/cn";
 
 type ButtonBaseProps = {
@@ -9,17 +9,15 @@ type ButtonBaseProps = {
 
 type ActionButtonProps = ButtonBaseProps & ButtonHTMLAttributes<HTMLButtonElement>;
 
-type ActionLinkProps = ButtonBaseProps & {
-  href: string;
-};
+type ActionLinkProps = ButtonBaseProps & ComponentProps<typeof Link>;
 
 export const buttonBaseClass =
-  "inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-base";
+  "inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-medium transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-base";
 
-export const primaryButtonClass = "bg-brand-accent text-brand-white shadow-soft hover:bg-[#1d4ed8]";
+export const primaryButtonClass = "bg-blue-600 text-white hover:scale-105 hover:shadow-[0_0_28px_rgba(37,99,235,0.55)]";
 
 export const secondaryButtonClass =
-  "border border-slate-300 bg-brand-white text-brand-primary hover:border-brand-accent/30 hover:bg-blue-50 dark:border-white/[0.10] dark:bg-surface-card dark:text-white/90 dark:hover:border-white/[0.18] dark:hover:bg-surface-elevated";
+  "border border-white/20 text-white/80 hover:bg-white/5";
 
 export function PrimaryButton({ children, className, ...props }: ActionButtonProps) {
   return (
@@ -32,9 +30,9 @@ export function PrimaryButton({ children, className, ...props }: ActionButtonPro
   );
 }
 
-export function PrimaryLink({ href, children, className }: ActionLinkProps) {
+export function PrimaryLink({ href, children, className, ...props }: ActionLinkProps) {
   return (
-    <Link href={href} className={cn(buttonBaseClass, primaryButtonClass, className)}>
+    <Link href={href} className={cn(buttonBaseClass, primaryButtonClass, className)} {...props}>
       {children}
     </Link>
   );
@@ -55,7 +53,7 @@ export function SecondaryButton({ children, className, ...props }: ActionButtonP
   );
 }
 
-export function SecondaryLink({ href, children, className }: ActionLinkProps) {
+export function SecondaryLink({ href, children, className, ...props }: ActionLinkProps) {
   return (
     <Link
       href={href}
@@ -64,6 +62,7 @@ export function SecondaryLink({ href, children, className }: ActionLinkProps) {
         secondaryButtonClass,
         className,
       )}
+      {...props}
     >
       {children}
     </Link>

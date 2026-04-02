@@ -5,6 +5,7 @@ import Logo from "@/components/layout/Logo";
 import { Navigation } from "@/components/layout/Navigation";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { ctaCopy } from "@/lib/constants/cta";
 import { routes } from "@/lib/constants/routes";
 
 export function Header() {
@@ -23,30 +24,9 @@ export function Header() {
           <ThemeToggle />
           <PrimaryLink
             href={routes.quote}
-            className="
-              hidden md:inline-flex
-              px-5 py-2.5
-              rounded-xl
-              bg-blue-600 text-white
-              font-medium
-              shadow-sm
-
-              transition-all duration-200 ease-out
-
-              hover:bg-blue-700
-              hover:shadow-lg
-              hover:scale-[1.02]
-
-              active:scale-[0.98]
-              active:shadow-md
-
-              focus:outline-none
-              focus:ring-2
-              focus:ring-blue-400
-              focus:ring-offset-2
-            "
+            className="hidden md:inline-flex"
           >
-            Cotizar proyecto
+            {ctaCopy.primary}
           </PrimaryLink>
           <MobileMenu />
         </div>

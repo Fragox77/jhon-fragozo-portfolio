@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { buttonBaseClass, primaryButtonClass } from "@/components/ui/Buttons";
+import { cn } from "@/lib/utils/cn";
+import { ctaCopy } from "@/lib/constants/cta";
 import { mainNavigation } from "@/lib/constants/navigation";
 import { routes } from "@/lib/constants/routes";
 
@@ -122,10 +125,10 @@ export function MobileMenu() {
 
               <Link
                 href={routes.quote}
-                className="mt-8 inline-flex w-full items-center justify-center rounded-xl bg-brand-accent px-5 py-3 text-base font-semibold text-brand-white shadow-soft transition hover:bg-[#1d4ed8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
+                className={cn(buttonBaseClass, primaryButtonClass, "mt-8 w-full")}
                 onClick={() => setOpen(false)}
               >
-                Cotizar
+                {ctaCopy.primary}
               </Link>
             </nav>
           </aside>

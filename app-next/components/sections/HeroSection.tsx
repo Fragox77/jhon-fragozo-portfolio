@@ -126,16 +126,10 @@ export function HeroSection() {
 
             {/* CTAs */}
             <motion.div className="flex flex-wrap items-center gap-3 pt-1" {...fadeIn(0.21)}>
-              <PrimaryLink
-                href={hero.ctas.primary.href}
-                className="px-7 py-3.5 shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)]"
-              >
+              <PrimaryLink href={hero.ctas.primary.href}>
                 {hero.ctas.primary.label}
               </PrimaryLink>
-              <SecondaryLink
-                href={hero.ctas.secondary.href}
-                className="border-white/10 bg-white/[0.05] px-6 py-3.5 text-white/80 hover:border-white/20 hover:bg-white/[0.10]"
-              >
+              <SecondaryLink href={hero.ctas.secondary.href}>
                 {hero.ctas.secondary.label}
               </SecondaryLink>
             </motion.div>

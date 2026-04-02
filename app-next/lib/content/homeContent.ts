@@ -1,3 +1,5 @@
+import { ctaCopy, ctaLinks } from "@/lib/constants/cta";
+
 export const homeContent = {
   hero: {
     badge: "Estudio digital para marcas en crecimiento",
@@ -6,8 +8,8 @@ export const homeContent = {
     subheadline:
       "Combino branding, desarrollo web y herramientas digitales para construir experiencias que ayudan a las empresas a comunicar mejor, verse mejor y funcionar mejor.",
     ctas: {
-      primary: { label: "Ver proyectos", href: "/portafolio" },
-      secondary: { label: "Cotizar proyecto", href: "/cotizador" },
+      primary: { label: ctaCopy.primary, href: ctaLinks.primary },
+      secondary: { label: ctaCopy.secondary, href: ctaLinks.secondary },
     },
     stats: [
       { label: "Proyectos ejecutados", value: "120+" },
@@ -89,7 +91,7 @@ export const homeContent = {
     title: "Quieres una estimacion para tu proyecto?",
     text:
       "Usa el cotizador para tener una referencia inicial de inversion segun el tipo de empresa, alcance del proyecto y tiempos de entrega.",
-    cta: { label: "Calcular inversion del proyecto", href: "/cotizador" },
+    cta: { label: ctaCopy.primary, href: ctaLinks.primary },
   },
   about: {
     title: "Jhon Fragozo",
@@ -102,7 +104,7 @@ export const homeContent = {
     text:
       "Si tu empresa necesita mejorar su identidad, su sitio web o desarrollar una herramienta digital util, podemos trabajar en una solucion estrategica y bien construida.",
     actions: {
-      primary: { label: "Solicitar cotizacion", href: "/contacto" },
+      primary: { label: ctaCopy.onboardingFinal, href: ctaLinks.onboardingFinal },
       whatsapp: { label: "Hablar por WhatsApp", href: "https://wa.me/573043195028" },
     },
   },

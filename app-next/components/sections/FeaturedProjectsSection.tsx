@@ -1,6 +1,7 @@
 import { homeContent } from "@/lib/content/homeContent";
 import { Card } from "@/components/ui/Card";
-import { PrimaryLink } from "@/components/ui/Buttons";
+import { SecondaryLink } from "@/components/ui/Buttons";
+import { ctaCopy, ctaLinks } from "@/lib/constants/cta";
 import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Reveal } from "@/components/sections/Reveal";
@@ -28,7 +29,7 @@ export function FeaturedProjectsSection() {
       </div>
 
       <Reveal className="mt-8" delay={0.1}>
-        <PrimaryLink href="/portafolio">Ver proyectos completos</PrimaryLink>
+        <SecondaryLink href={ctaLinks.secondary}>{ctaCopy.secondary}</SecondaryLink>
       </Reveal>
     </Section>
   );

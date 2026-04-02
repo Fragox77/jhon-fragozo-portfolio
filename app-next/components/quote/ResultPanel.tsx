@@ -4,6 +4,7 @@ import type { QuoteResult } from "@/lib/pricing/calculateQuote";
 import { getCustomerBenefits, getTimelineByUrgency } from "@/lib/pricing/customerInsights";
 import type { ServiceType, UrgencyType } from "@/lib/pricing/pricingConfig";
 import { formatCOP } from "@/lib/utils/money";
+import { ctaCopy } from "@/lib/constants/cta";
 import { GhostButton, PrimaryButton } from "@/components/ui/Buttons";
 
 type ResultPanelProps = {
@@ -79,7 +80,7 @@ export function ResultPanel({
 
       <div className="mt-4 flex flex-wrap gap-3">
         <PrimaryButton type="button" onClick={onRequestQuote} className="px-4 py-2">
-          Solicitar cotización personalizada
+          {ctaCopy.onboardingFinal}
         </PrimaryButton>
         {showPrice && <WhatsappButton url={whatsappUrl} label={whatsappLabel} />}
         {showPrice && (
