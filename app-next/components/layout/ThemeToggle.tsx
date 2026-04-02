@@ -1,17 +1,30 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useMounted } from "@/hooks/useMounted";
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("theme");
-      if (stored === "light" || stored === "dark") return stored;
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
-    }
-    return "light";
-  });
+  const mounted = useMounted();
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
+    if (!mounted) {
+      return;
+    }
+
+    const stored = localStorage.getItem("theme");
+    if (stored === "light" || stored === "dark") {
+      setTheme(stored);
+      return;
+    }
+
+    setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  }, [mounted]);
+
+  useEffect(() => {
+    if (!mounted) {
+      return;
+    }
+
     const root = document.documentElement;
     root.setAttribute("data-theme", theme);
     if (theme === "dark") {
@@ -20,10 +33,13 @@ export function ThemeToggle() {
       root.classList.remove("dark");
     }
     localStorage.setItem("theme", theme);
-  }, [theme]);
+  }, [mounted, theme]);
 
-  // Detectar cambios de preferencia del sistema
   useEffect(() => {
+    if (!mounted) {
+      return;
+    }
+
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const handler = (e: MediaQueryListEvent) => {
       if (!localStorage.getItem("theme")) {
@@ -32,13 +48,26 @@ export function ThemeToggle() {
     };
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
-  }, []);
+  }, [mounted]);
+
+  if (!mounted) {
+    return (
+      <button
+        aria-label="Cambiar tema"
+        title="Cambiar tema"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm"
+        type="button"
+      >
+        <span className="sr-only">Cambiar tema</span>
+      </button>
+    );
+  }
 
   return (
     <button
       aria-label={theme === "dark" ? "Activar modo claro" : "Activar modo oscuro"}
       title={theme === "dark" ? "Modo claro" : "Modo oscuro"}
-      className="ml-2 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-100 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-700"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       type="button"
     >
