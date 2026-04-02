@@ -36,6 +36,8 @@ jobs:
       - name: Build static export
         working-directory: app-next
         run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /minifolio
 
       - name: Ensure .nojekyll for _next assets
         run: touch app-next/out/.nojekyll
