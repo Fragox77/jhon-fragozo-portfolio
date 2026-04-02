@@ -21,8 +21,32 @@ export function Header() {
 
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
-          <PrimaryLink href={routes.quote} className="hidden h-10 px-4 py-2 md:inline-flex">
-            Cotizar
+          <PrimaryLink
+            href={routes.quote}
+            className="
+              hidden md:inline-flex
+              px-5 py-2.5
+              rounded-xl
+              bg-blue-600 text-white
+              font-medium
+              shadow-sm
+
+              transition-all duration-200 ease-out
+
+              hover:bg-blue-700
+              hover:shadow-lg
+              hover:scale-[1.02]
+
+              active:scale-[0.98]
+              active:shadow-md
+
+              focus:outline-none
+              focus:ring-2
+              focus:ring-blue-400
+              focus:ring-offset-2
+            "
+          >
+            Cotizar proyecto
           </PrimaryLink>
           <MobileMenu />
         </div>
