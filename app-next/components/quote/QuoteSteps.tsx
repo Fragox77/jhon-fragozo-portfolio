@@ -33,10 +33,10 @@ export function QuoteSteps({ currentStep }: QuoteStepsProps) {
   };
 
   const serviceDescriptions: Record<ServiceType, string> = {
-    branding: "Construcción de marca desde la estrategia hasta la identidad visual.",
-    identity: "Diseño profesional de logo y sistema visual de marca.",
-    campaign: "Piezas visuales enfocadas en atraer clientes y mejorar la presencia digital.",
-    print: "Material gráfico listo para impresión con una línea visual profesional.",
+    branding: "Estrategia e identidad para posicionar mejor tu marca.",
+    identity: "Logo, sistema visual y piezas para redes con coherencia de marca.",
+    campaign: "Creatividades para campañas, redes y acciones digitales orientadas a resultados.",
+    print: "Piezas gráficas y material corporativo, listo para impresión y uso comercial.",
   };
 
   const urgencyDescriptions: Record<UrgencyType, string> = {
@@ -55,22 +55,22 @@ export function QuoteSteps({ currentStep }: QuoteStepsProps) {
   if (currentStep === 1) {
     return (
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-[var(--primary)]">1. Perfil corporativo</h2>
-        <p className="text-sm text-[var(--neutral)]">Selecciona el perfil que mejor describe tu organización.</p>
-        <div className="grid gap-3 sm:grid-cols-3" role="radiogroup" aria-label="Perfil corporativo">
+        <h2 className="text-xl font-semibold text-[var(--primary)]">1. Cuéntanos sobre tu negocio</h2>
+        <p className="text-sm text-[var(--neutral)]">Selecciona la opción que mejor se parece a tu realidad actual.</p>
+        <div className="grid gap-3 sm:grid-cols-3" role="radiogroup" aria-label="Cuéntanos sobre tu negocio">
           {(Object.keys(companyLabels) as CompanyType[]).map((option) => (
             <button
               key={option}
               type="button"
               onClick={() => setValue("companyType", option, { shouldValidate: true })}
-              className={`rounded-xl border px-4 py-3 text-left text-sm font-medium transition ${
+              className={`min-w-0 rounded-xl border px-4 py-3 text-left text-sm font-medium transition ${
                 values.companyType === option
                   ? "border-[var(--secondary)] bg-blue-50 text-[var(--secondary)]"
                   : "border-slate-200 bg-white text-[var(--neutral)]"
               }`}
             >
-              <span className="block text-sm font-semibold">{companyLabels[option]}</span>
-              <span className="mt-1 block text-xs text-slate-500">{companyDescriptions[option]}</span>
+              <span className="block break-words text-sm font-semibold">{companyLabels[option]}</span>
+              <span className="mt-1 block break-words text-xs text-slate-500">{companyDescriptions[option]}</span>
             </button>
           ))}
         </div>
@@ -81,16 +81,16 @@ export function QuoteSteps({ currentStep }: QuoteStepsProps) {
   if (currentStep === 2) {
     return (
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-[var(--primary)]">2. Sector económico</h2>
+        <h2 className="text-xl font-semibold text-[var(--primary)]">2. ¿A qué se dedica tu negocio?</h2>
         <p className="text-sm text-[var(--neutral)]">
-          El sector de tu organización nos ayuda a estimar el nivel de complejidad y los requerimientos de comunicación.
+          Con esta información ajustamos mejor la complejidad y el enfoque de tu proyecto.
         </p>
         <Select
           id="sector"
           {...register("sector")}
         >
           <option value="" disabled>
-            Selecciona el sector de tu organización
+            Selecciona la actividad principal de tu negocio
           </option>
           {(Object.keys(sectorLabels) as SectorType[]).map((option) => (
             <option key={option} value={option}>
@@ -106,21 +106,21 @@ export function QuoteSteps({ currentStep }: QuoteStepsProps) {
     return (
       <section className="space-y-4">
         <h2 className="text-xl font-semibold text-[var(--primary)]">3. ¿Qué tipo de proyecto necesitas?</h2>
-        <p className="text-sm text-[var(--neutral)]">Selecciona el servicio principal que necesitas para tu organización.</p>
+        <p className="text-sm text-[var(--neutral)]">Puedes estimar desde branding hasta diseño para redes, campañas o piezas gráficas.</p>
         <div className="grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label="Servicio requerido">
           {(Object.keys(serviceLabels) as ServiceType[]).map((option) => (
             <button
               key={option}
               type="button"
               onClick={() => setValue("service", option, { shouldValidate: true })}
-              className={`rounded-xl border px-4 py-3 text-left text-sm font-medium transition ${
+              className={`min-w-0 rounded-xl border px-4 py-3 text-left text-sm font-medium transition ${
                 values.service === option
                   ? "border-[var(--secondary)] bg-blue-50 text-[var(--secondary)]"
                   : "border-slate-200 bg-white text-[var(--neutral)]"
               }`}
             >
-              <span className="block text-sm font-semibold">{serviceLabels[option]}</span>
-              <span className="mt-1 block text-xs text-slate-500">{serviceDescriptions[option]}</span>
+              <span className="block break-words text-sm font-semibold">{serviceLabels[option]}</span>
+              <span className="mt-1 block break-words text-xs text-slate-500">{serviceDescriptions[option]}</span>
             </button>
           ))}
         </div>
@@ -132,7 +132,7 @@ export function QuoteSteps({ currentStep }: QuoteStepsProps) {
     const deliverables = deliverablesByService[values.service];
     return (
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-[var(--primary)]">4. Alcance del proyecto</h2>
+        <h2 className="text-xl font-semibold text-[var(--primary)]">4. ¿Qué necesitas desarrollar?</h2>
         <p className="text-sm text-[var(--neutral)]">Selecciona los elementos que te gustaría incluir en este proyecto.</p>
         <fieldset className="space-y-2">
           <legend className="text-sm font-medium text-[var(--neutral)]">Este proyecto podría incluir:</legend>

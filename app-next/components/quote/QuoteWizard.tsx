@@ -31,6 +31,7 @@ export function QuoteWizard() {
   const [mobileSummaryOpen, setMobileSummaryOpen] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [quoteRequested, setQuoteRequested] = useState(false);
+  const [priceUnlocked, setPriceUnlocked] = useState(false);
 
   const resolvedService =
     queryService === "branding" || queryService === "identity" || queryService === "campaign" || queryService === "print"
@@ -55,6 +56,7 @@ export function QuoteWizard() {
   const mobileWhatsappLabel = values.urgency === "express" ? "Enviar solicitud express" : "Enviar por WhatsApp";
 
   const progress = Math.round((currentStep / steps.length) * 100);
+  const showPrice = priceUnlocked && currentStep === steps.length;
 
   const nextStep = async () => {
     const fields = steps[currentStep - 1].fields;
@@ -63,6 +65,11 @@ export function QuoteWizard() {
       return;
     }
     saveQuote(values);
+    if (currentStep === steps.length) {
+      setPriceUnlocked(true);
+      return;
+    }
+
     setCurrentStep((prev) => Math.min(prev + 1, steps.length));
   };
 
@@ -73,10 +80,10 @@ export function QuoteWizard() {
   const copySummary = async () => {
     const summary = [
       "Resumen del cotizador",
-      `Perfil corporativo: ${companyLabels[values.companyType]}`,
-      `Sector: ${sectorLabels[values.sector]}`,
+      `Cuéntanos sobre tu negocio: ${companyLabels[values.companyType]}`,
+      `¿A qué se dedica tu negocio?: ${sectorLabels[values.sector]}`,
       `Servicio: ${serviceLabels[values.service]}`,
-      `Rango estimado: ${formatCOP(quote.min)} - ${formatCOP(quote.max)} COP`,
+      `Rango estimado: ${showPrice ? `${formatCOP(quote.min)} - ${formatCOP(quote.max)} COP` : "Disponible al finalizar el paso 5"}`,
       `Presupuesto aproximado: ${formatCOP(values.budgetValue)}`,
     ].join("\n");
 
@@ -100,10 +107,10 @@ export function QuoteWizard() {
         <section className="space-y-5 pb-28 lg:pb-0">
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <p className="text-sm text-[var(--neutral)]">
-              Completa estos pasos para obtener una estimación aproximada en pesos colombianos según el tipo de empresa, sector,
-              alcance del proyecto y tiempos de entrega.
+              Completa estos pasos para organizar lo que necesitas y recibir una estimación aproximada según el tipo de negocio,
+              el tipo de proyecto y los tiempos de entrega.
             </p>
-            <p className="mt-2 text-sm text-[var(--neutral)]">Esta estimación te ayudará a tener una idea inicial de la inversión necesaria.</p>
+            <p className="mt-2 text-sm text-[var(--neutral)]">Primero te damos claridad sobre el alcance y al final te mostramos el rango estimado.</p>
             <div className="mt-4 flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-slate-500">
               <span>Paso {currentStep} de {steps.length}</span>
               <span>{progress}%</span>
@@ -121,7 +128,7 @@ export function QuoteWizard() {
                   Anterior
                 </SecondaryButton>
                 <PrimaryButton type="button" onClick={nextStep}>
-                  {currentStep === steps.length ? "Actualizar resultado" : "Siguiente"}
+                  {currentStep === steps.length ? "Ver estimación" : "Siguiente"}
                 </PrimaryButton>
               </div>
             </div>
@@ -136,6 +143,7 @@ export function QuoteWizard() {
             isAdmin={isAdmin}
             onRequestQuote={requestPersonalizedQuote}
             onCopySummary={copySummary}
+            showPrice={showPrice}
           />
 
           {quoteRequested && (
@@ -155,20 +163,20 @@ export function QuoteWizard() {
           <h3 className="text-base font-semibold text-[var(--primary)]">Resumen de tu proyecto</h3>
           <dl className="mt-4 space-y-3 text-sm">
             <div>
-              <dt className="text-slate-500">Perfil corporativo</dt>
-              <dd className="font-medium text-[var(--primary)]">{companyLabels[values.companyType]}</dd>
+              <dt className="text-slate-500">Cuéntanos sobre tu negocio</dt>
+              <dd className="font-medium text-[var(--primary)] break-words">{companyLabels[values.companyType]}</dd>
             </div>
             <div>
-              <dt className="text-slate-500">Sector</dt>
-              <dd className="font-medium text-[var(--primary)]">{sectorLabels[values.sector]}</dd>
+              <dt className="text-slate-500">¿A qué se dedica tu negocio?</dt>
+              <dd className="font-medium text-[var(--primary)] break-words">{sectorLabels[values.sector]}</dd>
             </div>
             <div>
               <dt className="text-slate-500">Servicio</dt>
-              <dd className="font-medium text-[var(--primary)]">{serviceLabels[values.service]}</dd>
+              <dd className="font-medium text-[var(--primary)] break-words">{serviceLabels[values.service]}</dd>
             </div>
             <div>
-              <dt className="text-slate-500">Alcance</dt>
-              <dd className="font-medium text-[var(--primary)]">{values.deliverables.length} elementos seleccionados</dd>
+              <dt className="text-slate-500">¿Qué necesitas desarrollar?</dt>
+              <dd className="font-medium text-[var(--primary)] break-words">{values.deliverables.length} elementos seleccionados</dd>
             </div>
             <div>
               <dt className="text-slate-500">Presupuesto</dt>
@@ -192,9 +200,13 @@ export function QuoteWizard() {
         >
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Resumen rapido</p>
-            <p className="mt-1 text-sm font-semibold text-[var(--primary)]">
-              {formatCOP(quote.min)} - {formatCOP(quote.max)} COP
-            </p>
+            {showPrice ? (
+              <p className="mt-1 text-sm font-semibold text-[var(--primary)]">
+                {formatCOP(quote.min)} - {formatCOP(quote.max)} COP
+              </p>
+            ) : (
+              <p className="mt-1 text-sm font-semibold text-[var(--primary)]">Completa el paso 5 para ver tu estimación</p>
+            )}
           </div>
           <span className="text-sm font-semibold text-[var(--secondary)]">{mobileSummaryOpen ? "Ocultar" : "Ver"}</span>
         </button>
@@ -202,39 +214,41 @@ export function QuoteWizard() {
         {mobileSummaryOpen && (
           <div id="mobile-project-summary" className="mt-3 rounded-xl border border-slate-200 bg-white p-3">
             <dl className="space-y-2 text-sm">
-              <div className="flex items-center justify-between gap-3">
-                <dt className="text-slate-500">Corporativo</dt>
-                <dd className="font-medium text-[var(--primary)]">{companyLabels[values.companyType]}</dd>
+              <div className="flex items-start justify-between gap-3">
+                <dt className="text-slate-500">Tu negocio</dt>
+                <dd className="min-w-0 max-w-[58%] break-words text-right font-medium text-[var(--primary)]">{companyLabels[values.companyType]}</dd>
               </div>
-              <div className="flex items-center justify-between gap-3">
-                <dt className="text-slate-500">Sector</dt>
-                <dd className="font-medium text-[var(--primary)]">{sectorLabels[values.sector]}</dd>
+              <div className="flex items-start justify-between gap-3">
+                <dt className="text-slate-500">Actividad</dt>
+                <dd className="min-w-0 max-w-[58%] break-words text-right font-medium text-[var(--primary)]">{sectorLabels[values.sector]}</dd>
               </div>
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex items-start justify-between gap-3">
                 <dt className="text-slate-500">Servicio</dt>
-                <dd className="font-medium text-[var(--primary)]">{serviceLabels[values.service]}</dd>
+                <dd className="min-w-0 max-w-[58%] break-words text-right font-medium text-[var(--primary)]">{serviceLabels[values.service]}</dd>
               </div>
-              <div className="flex items-center justify-between gap-3">
-                <dt className="text-slate-500">Alcance</dt>
-                <dd className="font-medium text-[var(--primary)]">{values.deliverables.length} elementos</dd>
+              <div className="flex items-start justify-between gap-3">
+                <dt className="text-slate-500">Desarrollo</dt>
+                <dd className="min-w-0 max-w-[58%] break-words text-right font-medium text-[var(--primary)]">{values.deliverables.length} elementos</dd>
               </div>
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex items-start justify-between gap-3">
                 <dt className="text-slate-500">Presupuesto</dt>
-                <dd className="font-medium text-[var(--primary)]">{formatCOP(values.budgetValue)}</dd>
+                <dd className="min-w-0 max-w-[58%] break-words text-right font-medium text-[var(--primary)]">{formatCOP(values.budgetValue)}</dd>
               </div>
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex items-start justify-between gap-3">
                 <dt className="text-slate-500">Tiempo</dt>
-                <dd className="font-medium text-[var(--primary)]">{urgencyLabels[values.urgency]}</dd>
+                <dd className="min-w-0 max-w-[58%] break-words text-right font-medium text-[var(--primary)]">{urgencyLabels[values.urgency]}</dd>
               </div>
             </dl>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              className={cn(buttonBaseClass, primaryButtonClass, "mt-3 w-full")}
-            >
-              {mobileWhatsappLabel}
-            </a>
+            {showPrice && (
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                className={cn(buttonBaseClass, primaryButtonClass, "mt-3 w-full")}
+              >
+                {mobileWhatsappLabel}
+              </a>
+            )}
           </div>
         )}
       </div>

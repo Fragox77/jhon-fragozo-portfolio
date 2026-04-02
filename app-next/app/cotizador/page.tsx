@@ -12,8 +12,8 @@ export default function CotizadorPage() {
         <Section className="pb-20 pt-16 md:pt-20">
           <SectionTitle
             subtitle="Cotizador"
-            title="Cotiza tu proyecto de diseno y branding"
-            description="Completa estos pasos para obtener una estimacion aproximada en pesos colombianos segun el tipo de organizacion, sector, alcance y tiempos de entrega."
+            title="Cuéntanos qué necesitas y recibe una estimación para tu proyecto"
+            description="Desde piezas para redes hasta identidad de marca o desarrollo web. Te ayudamos a estimar tu proyecto de forma clara y sin compromiso."
           />
           <div className="mt-10">
             <Suspense fallback={<p className="text-body text-brand-neutral">Cargando cotizador...</p>}>

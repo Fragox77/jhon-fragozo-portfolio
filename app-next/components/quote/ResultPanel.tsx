@@ -15,6 +15,7 @@ type ResultPanelProps = {
   budgetValue: number;
   onRequestQuote: () => void;
   onCopySummary: () => void;
+  showPrice: boolean;
 };
 
 export function ResultPanel({
@@ -26,6 +27,7 @@ export function ResultPanel({
   budgetValue,
   onRequestQuote,
   onCopySummary,
+  showPrice,
 }: ResultPanelProps) {
   const benefits = getCustomerBenefits(service);
   const timeline = getTimelineByUrgency(urgency);
@@ -40,11 +42,19 @@ export function ResultPanel({
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <h3 className="text-lg font-semibold text-[var(--primary)]">Estimación para tu proyecto</h3>
-      <p className="mt-2 text-sm text-[var(--neutral)]">Según la información que ingresaste, tu proyecto podría estar aproximadamente entre:</p>
-      <p className="mt-2 text-3xl font-semibold text-[var(--primary)]">
-        {formatCOP(quote.min)} - {formatCOP(quote.max)} COP
-      </p>
+      <h3 className="text-lg font-semibold text-[var(--primary)]">Resultado de tu proyecto</h3>
+      {showPrice ? (
+        <>
+          <p className="mt-2 text-sm text-[var(--neutral)]">Según la información que ingresaste, tu proyecto podría estar aproximadamente entre:</p>
+          <p className="mt-2 break-words text-3xl font-semibold text-[var(--primary)]">
+            {formatCOP(quote.min)} - {formatCOP(quote.max)} COP
+          </p>
+        </>
+      ) : (
+        <p className="mt-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-3 text-sm text-[var(--neutral)]">
+          Completa el paso 5 y haz clic en <strong className="text-[var(--primary)]">Ver estimación</strong> para conocer tu rango aproximado en COP.
+        </p>
+      )}
 
       <div className="mt-5">
         <h4 className="text-sm font-semibold text-[var(--primary)]">Esta inversión podría incluir</h4>
@@ -65,16 +75,18 @@ export function ResultPanel({
         </p>
       </div>
 
-      <p className="mt-4 rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-[var(--neutral)]">{budgetMessage}</p>
+      {showPrice && <p className="mt-4 rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-[var(--neutral)]">{budgetMessage}</p>}
 
       <div className="mt-4 flex flex-wrap gap-3">
         <PrimaryButton type="button" onClick={onRequestQuote} className="px-4 py-2">
           Solicitar cotización personalizada
         </PrimaryButton>
-        <WhatsappButton url={whatsappUrl} label={whatsappLabel} />
-        <GhostButton type="button" onClick={onCopySummary} className="px-4 py-2">
-          Copiar resumen
-        </GhostButton>
+        {showPrice && <WhatsappButton url={whatsappUrl} label={whatsappLabel} />}
+        {showPrice && (
+          <GhostButton type="button" onClick={onCopySummary} className="px-4 py-2">
+            Copiar resumen
+          </GhostButton>
+        )}
       </div>
 
       <p className="mt-4 text-xs text-slate-500">

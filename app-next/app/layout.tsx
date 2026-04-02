@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { siteContent } from "@/lib/content/siteContent";
@@ -10,7 +10,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const sora = Sora({
+const sora = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-sora",
 });
