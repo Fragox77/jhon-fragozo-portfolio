@@ -19,7 +19,7 @@ export default function PortafolioPage() {
         </div>
       </Section>
 
-      <Section className="bg-slate-50 pt-0">
+      <Section className="bg-slate-50 pt-0 dark:bg-slate-950/60">
         <SectionTitle
           title={portfolioContent.sectionTitle}
           description={portfolioContent.sectionDescription}

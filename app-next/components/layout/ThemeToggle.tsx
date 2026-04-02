@@ -55,7 +55,7 @@ export function ThemeToggle() {
       <button
         aria-label="Cambiar tema"
         title="Cambiar tema"
-        className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
         type="button"
       >
         <span className="sr-only">Cambiar tema</span>

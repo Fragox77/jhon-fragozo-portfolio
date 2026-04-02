@@ -5,7 +5,7 @@ export function Slider({ className, ...props }: InputHTMLAttributes<HTMLInputEle
   return (
     <input
       type="range"
-      className={cn("h-2 w-full cursor-pointer appearance-none rounded-full bg-slate-200 accent-brand-accent", className)}
+      className={cn("h-2 w-full cursor-pointer appearance-none rounded-full bg-slate-200 accent-brand-accent dark:bg-slate-700", className)}
       {...props}
     />
   );

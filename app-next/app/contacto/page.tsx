@@ -16,11 +16,11 @@ export default function ContactoPage() {
             </p>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-lg border border-slate-200 p-4">
+              <div className="rounded-lg border border-slate-200 p-4 dark:border-slate-700 dark:bg-slate-900/60">
                 <p className="text-xs uppercase tracking-wide text-slate-500">WhatsApp</p>
                 <p className="mt-1 text-body-lg font-semibold text-brand-primary">+57 304 319 5028</p>
               </div>
-              <div className="rounded-lg border border-slate-200 p-4">
+              <div className="rounded-lg border border-slate-200 p-4 dark:border-slate-700 dark:bg-slate-900/60">
                 <p className="text-xs uppercase tracking-wide text-slate-500">Correo</p>
                 <p className="mt-1 text-body-lg font-semibold text-brand-primary">hola@jhonfragozo.com</p>
               </div>

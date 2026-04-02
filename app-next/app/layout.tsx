@@ -26,9 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <body className={`${inter.variable} ${sora.variable}`}>
-        <div id="app-shell" className="min-h-screen bg-[var(--base)] text-[var(--primary)]">
+        <div id="app-shell" className="min-h-screen bg-[var(--base)] text-[var(--primary)] transition-colors duration-300">
           <Header />
           {children}
           <Footer />

@@ -13,8 +13,8 @@ export function ValuePropositionSection() {
           <p className="max-w-3xl text-body text-brand-neutral">{homeContent.value.text}</p>
         </Reveal>
         <Reveal className="lg:col-span-5" delay={0.08}>
-          <Card className="relative overflow-hidden border-brand-accent/20 bg-gradient-to-br from-blue-50 to-white">
-            <div className="absolute -right-10 -top-10 h-36 w-36 rounded-full bg-brand-accent/10 blur-2xl" />
+          <Card className="relative overflow-hidden border-brand-accent/20 bg-gradient-to-br from-blue-50 to-white dark:from-slate-900 dark:to-slate-800">
+            <div className="absolute -right-10 -top-10 h-36 w-36 rounded-full bg-brand-accent/10 blur-2xl dark:bg-brand-accent/20" />
             <p className="relative text-small font-semibold uppercase tracking-wide text-brand-accent">Enfoque</p>
             <p className="relative mt-3 text-h3 font-heading font-semibold text-brand-primary">Estrategia + Diseno + Tecnologia</p>
             <p className="relative mt-3 text-body text-brand-neutral">

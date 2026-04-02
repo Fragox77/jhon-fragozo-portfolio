@@ -24,7 +24,7 @@ export function HeroVariantEditorial() {
           </h1>
           <p className="max-w-3xl text-body-lg text-slate-200">{hero.subheadline}</p>
           <div className="flex flex-wrap gap-3">
-            <PrimaryLink href={hero.ctas.primary.href} className="bg-brand-white text-brand-primary hover:bg-slate-100">
+            <PrimaryLink href={hero.ctas.primary.href} className="bg-brand-white text-brand-primary hover:bg-slate-100 dark:bg-slate-100 dark:text-slate-900">
               {hero.ctas.primary.label}
             </PrimaryLink>
             <SecondaryLink href={hero.ctas.secondary.href} className="border-slate-400/60 bg-transparent text-brand-white hover:bg-slate-900/50">

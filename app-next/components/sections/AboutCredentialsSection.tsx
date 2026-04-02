@@ -7,7 +7,7 @@ export function AboutCredentialsSection() {
   return (
     <Section id="sobre-mi-home">
       <Reveal>
-        <Card className="border-brand-accent/20 bg-gradient-to-br from-white to-blue-50">
+        <Card className="border-brand-accent/20 bg-gradient-to-br from-white to-blue-50 dark:from-slate-900 dark:to-slate-800">
           <p className="text-small font-semibold uppercase tracking-wide text-brand-accent">Sobre mi</p>
           <h2 className="mt-3 text-h2 font-heading font-bold text-brand-primary">{homeContent.about.title}</h2>
           <p className="mt-1 text-body-lg text-brand-neutral">{homeContent.about.subtitle}</p>

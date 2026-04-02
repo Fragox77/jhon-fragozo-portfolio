@@ -46,7 +46,7 @@ export function MobileMenu() {
         aria-label="Abrir menú"
         aria-expanded={open}
         aria-controls="mobile-navigation-drawer"
-        className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-800 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 md:hidden"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-800 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800 md:hidden"
         onClick={() => setOpen(true)}
       >
         <svg
@@ -77,10 +77,10 @@ export function MobileMenu() {
             role="dialog"
             aria-modal="true"
             aria-label="Menu de navegacion"
-            className="absolute right-0 top-0 flex h-dvh w-[88%] max-w-sm flex-col border-l border-slate-200 bg-white shadow-2xl"
+            className="absolute right-0 top-0 flex h-dvh w-[88%] max-w-sm flex-col border-l border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900"
           >
-            <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
-              <span className="text-lg font-semibold text-slate-900">
+            <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-700">
+              <span className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                 Menú
               </span>
 
@@ -88,7 +88,7 @@ export function MobileMenu() {
                 ref={closeButtonRef}
                 type="button"
                 aria-label="Cerrar menú"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-700 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-700 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 dark:text-slate-300 dark:hover:bg-slate-800"
                 onClick={() => setOpen(false)}
               >
                 <svg
@@ -111,7 +111,7 @@ export function MobileMenu() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="block text-lg font-semibold text-slate-900 transition-colors hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
+                      className="block text-lg font-semibold text-slate-900 transition-colors hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 dark:text-slate-100"
                       onClick={() => setOpen(false)}
                     >
                       {item.label}

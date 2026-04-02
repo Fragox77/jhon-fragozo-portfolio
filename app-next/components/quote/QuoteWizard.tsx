@@ -105,7 +105,7 @@ export function QuoteWizard() {
     <FormProvider {...form}>
       <div className="grid gap-6 lg:grid-cols-[1.35fr_0.65fr]">
         <section className="space-y-5 pb-28 lg:pb-0">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900/70">
             <p className="text-sm text-[var(--neutral)]">
               Completa estos pasos para organizar lo que necesitas y recibir una estimación aproximada según el tipo de negocio,
               el tipo de proyecto y los tiempos de entrega.
@@ -120,7 +120,7 @@ export function QuoteWizard() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900/70">
             <QuoteSteps currentStep={currentStep} />
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-3">
@@ -159,7 +159,7 @@ export function QuoteWizard() {
           {feedback && <p className="text-sm text-[var(--neutral)]">{feedback}</p>}
         </section>
 
-        <aside className="hidden h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-24 lg:block">
+        <aside className="hidden h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900/70 lg:sticky lg:top-24 lg:block">
           <h3 className="text-base font-semibold text-[var(--primary)]">Resumen de tu proyecto</h3>
           <dl className="mt-4 space-y-3 text-sm">
             <div>
@@ -190,13 +190,13 @@ export function QuoteWizard() {
         </aside>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-3 shadow-[0_-10px_30px_rgba(15,23,42,0.12)] backdrop-blur lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-3 shadow-[0_-10px_30px_rgba(15,23,42,0.12)] backdrop-blur dark:border-slate-700 dark:bg-slate-900/95 lg:hidden">
         <button
           type="button"
           onClick={() => setMobileSummaryOpen((prev) => !prev)}
           aria-expanded={mobileSummaryOpen}
           aria-controls="mobile-project-summary"
-          className="flex w-full items-center justify-between rounded-xl bg-slate-50 px-3 py-3 text-left"
+          className="flex w-full items-center justify-between rounded-xl bg-slate-50 px-3 py-3 text-left dark:bg-slate-800"
         >
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Resumen rapido</p>
@@ -212,7 +212,7 @@ export function QuoteWizard() {
         </button>
 
         {mobileSummaryOpen && (
-          <div id="mobile-project-summary" className="mt-3 rounded-xl border border-slate-200 bg-white p-3">
+          <div id="mobile-project-summary" className="mt-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-900">
             <dl className="space-y-2 text-sm">
               <div className="flex items-start justify-between gap-3">
                 <dt className="text-slate-500">Tu negocio</dt>

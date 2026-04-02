@@ -15,7 +15,7 @@ export function StepCompany() {
 
   return (
     <section aria-labelledby="step-company-title" className="space-y-4">
-      <h2 id="step-company-title" className="text-xl font-semibold text-slate-900">
+      <h2 id="step-company-title" className="text-xl font-semibold text-slate-900 dark:text-slate-100">
         1. Tipo de empresa
       </h2>
       <p className="text-sm text-slate-600">Define el tamaño y madurez de la organización.</p>
@@ -29,8 +29,8 @@ export function StepCompany() {
             onClick={() => setValue("companyType", option, { shouldValidate: true })}
             className={`rounded-lg border px-4 py-3 text-left text-sm transition ${
               selected === option
-                ? "border-blue-600 bg-blue-50 text-blue-800"
-                : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
+                ? "border-blue-600 bg-blue-50 text-blue-800 dark:bg-blue-950/40 dark:text-blue-200"
+                : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
             }`}
           >
             {companyLabels[option]}

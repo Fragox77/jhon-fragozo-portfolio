@@ -65,8 +65,8 @@ export function QuoteSteps({ currentStep }: QuoteStepsProps) {
               onClick={() => setValue("companyType", option, { shouldValidate: true })}
               className={`min-w-0 rounded-xl border px-4 py-3 text-left text-sm font-medium transition ${
                 values.companyType === option
-                  ? "border-[var(--secondary)] bg-blue-50 text-[var(--secondary)]"
-                  : "border-slate-200 bg-white text-[var(--neutral)]"
+                  ? "border-[var(--secondary)] bg-blue-50 text-[var(--secondary)] dark:bg-blue-950/40"
+                  : "border-slate-200 bg-white text-[var(--neutral)] dark:border-slate-700 dark:bg-slate-900"
               }`}
             >
               <span className="block break-words text-sm font-semibold">{companyLabels[option]}</span>
@@ -115,8 +115,8 @@ export function QuoteSteps({ currentStep }: QuoteStepsProps) {
               onClick={() => setValue("service", option, { shouldValidate: true })}
               className={`min-w-0 rounded-xl border px-4 py-3 text-left text-sm font-medium transition ${
                 values.service === option
-                  ? "border-[var(--secondary)] bg-blue-50 text-[var(--secondary)]"
-                  : "border-slate-200 bg-white text-[var(--neutral)]"
+                  ? "border-[var(--secondary)] bg-blue-50 text-[var(--secondary)] dark:bg-blue-950/40"
+                  : "border-slate-200 bg-white text-[var(--neutral)] dark:border-slate-700 dark:bg-slate-900"
               }`}
             >
               <span className="block break-words text-sm font-semibold">{serviceLabels[option]}</span>
@@ -137,7 +137,7 @@ export function QuoteSteps({ currentStep }: QuoteStepsProps) {
         <fieldset className="space-y-2">
           <legend className="text-sm font-medium text-[var(--neutral)]">Este proyecto podría incluir:</legend>
           {deliverables.map((item) => (
-            <label key={item.id} className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">
+            <label key={item.id} className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
               <input type="checkbox" value={item.id} {...register("deliverables")} className="h-4 w-4 accent-[var(--secondary)]" />
               {item.label}
             </label>
@@ -160,7 +160,7 @@ export function QuoteSteps({ currentStep }: QuoteStepsProps) {
         <fieldset className="space-y-2">
           <legend className="text-sm font-medium text-[var(--neutral)]">Adicionales (opcionales)</legend>
           {globalExtras.map((item) => (
-            <label key={item.id} className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">
+            <label key={item.id} className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
               <input type="checkbox" value={item.id} {...register("extras")} className="h-4 w-4 accent-[var(--secondary)]" />
               {item.label}
             </label>
@@ -189,8 +189,8 @@ export function QuoteSteps({ currentStep }: QuoteStepsProps) {
             onClick={() => setValue("urgency", option, { shouldValidate: true })}
             className={`rounded-xl border px-4 py-3 text-left text-sm font-medium transition ${
               values.urgency === option
-                ? "border-[var(--secondary)] bg-blue-50 text-[var(--secondary)]"
-                : "border-slate-200 bg-white text-[var(--neutral)]"
+                ? "border-[var(--secondary)] bg-blue-50 text-[var(--secondary)] dark:bg-blue-950/40"
+                : "border-slate-200 bg-white text-[var(--neutral)] dark:border-slate-700 dark:bg-slate-900"
             }`}
           >
             <span className="block text-sm font-semibold">{urgencyLabels[option]}</span>

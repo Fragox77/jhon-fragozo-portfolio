@@ -18,9 +18,9 @@ const formatDate = (isoDate: string) => {
 
 export function RecentLeadsTable({ leads, onClearHistory }: RecentLeadsTableProps) {
   return (
-    <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm" aria-labelledby="recent-leads-title">
+    <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900/70" aria-labelledby="recent-leads-title">
       <div className="mb-3 flex items-center justify-between">
-        <h3 id="recent-leads-title" className="text-lg font-semibold text-slate-900">
+        <h3 id="recent-leads-title" className="text-lg font-semibold text-slate-900 dark:text-slate-100">
           Últimos leads guardados
         </h3>
         <div className="flex items-center gap-3">
@@ -28,7 +28,7 @@ export function RecentLeadsTable({ leads, onClearHistory }: RecentLeadsTableProp
           <button
             type="button"
             onClick={onClearHistory}
-            className="rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50"
+            className="rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
           >
             Limpiar historial
           </button>
@@ -36,12 +36,12 @@ export function RecentLeadsTable({ leads, onClearHistory }: RecentLeadsTableProp
       </div>
 
       {leads.length === 0 ? (
-        <p className="text-sm text-slate-600">Aún no hay leads guardados en este navegador.</p>
+        <p className="text-sm text-slate-600 dark:text-slate-400">Aún no hay leads guardados en este navegador.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full text-left text-sm" aria-label="Tabla de últimos leads">
             <thead>
-              <tr className="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500">
+              <tr className="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500 dark:border-slate-700 dark:text-slate-400">
                 <th className="px-2 py-2 font-medium">Fecha</th>
                 <th className="px-2 py-2 font-medium">Nombre</th>
                 <th className="px-2 py-2 font-medium">Empresa</th>
@@ -51,12 +51,12 @@ export function RecentLeadsTable({ leads, onClearHistory }: RecentLeadsTableProp
             </thead>
             <tbody>
               {leads.slice(0, 5).map((lead) => (
-                <tr key={lead.id} className="border-b border-slate-100 text-slate-700 last:border-b-0">
+                <tr key={lead.id} className="border-b border-slate-100 text-slate-700 last:border-b-0 dark:border-slate-800 dark:text-slate-300">
                   <td className="px-2 py-2">{formatDate(lead.createdAt)}</td>
                   <td className="px-2 py-2">{lead.data.leadName}</td>
                   <td className="px-2 py-2">{lead.data.leadCompany}</td>
                   <td className="px-2 py-2">{lead.data.leadContact}</td>
-                  <td className="px-2 py-2 font-medium text-slate-900">
+                  <td className="px-2 py-2 font-medium text-slate-900 dark:text-slate-100">
                     {formatCOP(lead.quoteMin)} - {formatCOP(lead.quoteMax)}
                   </td>
                 </tr>

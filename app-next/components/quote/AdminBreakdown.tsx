@@ -7,7 +7,7 @@ type AdminBreakdownProps = {
 
 export function AdminBreakdown({ breakdown }: AdminBreakdownProps) {
   return (
-    <section className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
+    <section className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/70">
       <h4 className="text-sm font-semibold text-[var(--primary)]">Modo admin: desglose técnico</h4>
       <div className="mt-3 grid gap-2 text-sm text-[var(--neutral)] sm:grid-cols-2">
         <p>Base: {formatCOP(breakdown.baseMin)} - {formatCOP(breakdown.baseMax)}</p>

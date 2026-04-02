@@ -12,7 +12,7 @@ export function StepSector() {
 
   return (
     <section aria-labelledby="step-sector-title" className="space-y-4">
-      <h2 id="step-sector-title" className="text-xl font-semibold text-slate-900">
+      <h2 id="step-sector-title" className="text-xl font-semibold text-slate-900 dark:text-slate-100">
         2. Sector económico
       </h2>
       <p className="text-sm text-slate-600">Selecciona el sector para ajustar complejidad regulatoria y competitiva.</p>
@@ -22,7 +22,7 @@ export function StepSector() {
       <select
         id="sector-select"
         aria-invalid={Boolean(errors.sector)}
-        className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none ring-0 focus:border-blue-500"
+        className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none ring-0 focus:border-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
         {...register("sector")}
       >
         {(Object.keys(sectorLabels) as SectorType[]).map((option) => (
