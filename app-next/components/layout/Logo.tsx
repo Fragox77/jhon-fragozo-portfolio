@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { cn } from '@/lib/utils/cn';
 
 interface LogoProps {
@@ -6,43 +5,46 @@ interface LogoProps {
   variant?: 'light' | 'dark';
 }
 
-// Dimensiones que coinciden exactamente con viewBox="0 0 254 32" del SVG.
-// next/image usa estos valores para el aspect-ratio intrínseco del elemento.
-// La altura visual real la controla el className (ej. h-7) vía CSS.
+// Dimensiones que coinciden con viewBox="0 0 254 32" del SVG.
 const W = 254;
 const H = 32;
+
+// NEXT_PUBLIC_BASE_PATH se inyecta en .env.production → '/minifolio'.
+// En dev es '' (no se setea), lo que coincide con basePath: '' en next.config.ts.
+// Usar <img> directamente evita que next/image omita el basePath en el export estático.
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 export default function Logo({ className = '', variant = 'light' }: LogoProps) {
   if (variant === 'dark') {
     return (
-      <Image
-        src="/logo/logo-white.svg"
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={`${BASE}/logo/logo-white.svg`}
         alt="Logo Jhon Fragozo"
         width={W}
         height={H}
         className={cn('w-auto', className)}
-        priority
       />
     );
   }
 
   return (
     <>
-      <Image
-        src="/logo/Logo-black.svg"
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={`${BASE}/logo/Logo-black.svg`}
         alt="Logo Jhon Fragozo"
         width={W}
         height={H}
         className={cn('w-auto dark:hidden', className)}
-        priority
       />
-      <Image
-        src="/logo/logo-white.svg"
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={`${BASE}/logo/logo-white.svg`}
         alt="Logo Jhon Fragozo"
         width={W}
         height={H}
         className={cn('hidden w-auto dark:block', className)}
-        priority
       />
     </>
   );
