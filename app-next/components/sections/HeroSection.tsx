@@ -180,7 +180,7 @@ export function HeroSection() {
 
             {/* Card secundaria superior-derecha — solo lg+, puramente decorativa */}
             <motion.div
-              className="pointer-events-none absolute -right-4 -top-6 z-[5] hidden w-48 rounded-xl border border-white/[0.07] bg-[#0d1526] p-4 opacity-80 shadow-[0_20px_50px_-18px_rgba(2,6,23,0.85)] lg:block"
+              className="pointer-events-none absolute -right-4 -top-6 z-30 hidden w-48 rounded-xl border border-white/[0.07] bg-[#0d1526] p-4 opacity-80 shadow-[0_20px_50px_-18px_rgba(2,6,23,0.85)] lg:block"
               initial={{ opacity: 0, x: 12, y: 10 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true }}
@@ -244,7 +244,7 @@ export function HeroSection() {
 
             {/* Card terciaria inferior — solo lg+, puramente decorativa, sin sangrar a la izquierda */}
             <motion.div
-              className="pointer-events-none absolute -bottom-6 left-4 z-[5] hidden w-52 rounded-xl border border-white/[0.07] bg-[#0d1526] p-4 opacity-75 shadow-[0_20px_50px_-18px_rgba(2,6,23,0.85)] lg:block"
+              className="pointer-events-none absolute -bottom-6 left-4 z-30 hidden w-52 rounded-xl border border-white/[0.07] bg-[#0d1526] p-4 opacity-75 shadow-[0_20px_50px_-18px_rgba(2,6,23,0.85)] lg:block"
               initial={{ opacity: 0, x: -12, y: 10 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true }}
