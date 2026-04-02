@@ -147,9 +147,9 @@ export function QuoteWizard() {
           />
 
           {quoteRequested && (
-            <section className="rounded-2xl border border-blue-200 bg-blue-50 p-5">
-              <h3 className="text-lg font-semibold text-[var(--primary)]">Gracias por tu interés</h3>
-              <p className="mt-2 text-sm text-[var(--neutral)]">
+            <section className="rounded-2xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-500/20 dark:bg-blue-950/40">
+              <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100">Gracias por tu interés</h3>
+              <p className="mt-2 text-sm text-blue-800/80 dark:text-blue-200/70">
                 Tu información ha sido enviada correctamente. En breve podrás recibir una propuesta más detallada según las necesidades
                 de tu proyecto.
               </p>
