@@ -6,13 +6,17 @@ import { siteContent } from "@/lib/content/siteContent";
 import "./globals.css";
 
 const inter = Inter({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   variable: "--font-inter",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 const sora = Plus_Jakarta_Sans({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   variable: "--font-sora",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {

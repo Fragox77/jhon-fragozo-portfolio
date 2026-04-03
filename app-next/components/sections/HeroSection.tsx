@@ -110,7 +110,7 @@ export function HeroSection() {
 
             {/* Título — contraste máximo, jerarquía clara */}
             <motion.h1
-              className="text-3xl font-heading font-bold leading-tight tracking-[-0.025em] text-white sm:text-4xl lg:text-6xl"
+              className="text-3xl font-heading font-semibold leading-[1.1] tracking-[-0.02em] text-white sm:text-4xl lg:text-5xl"
               {...fadeIn(0.07)}
             >
               {heading}
@@ -118,7 +118,7 @@ export function HeroSection() {
 
             {/* Descripción */}
             <motion.p
-              className="text-base leading-relaxed text-white/70 sm:text-lg"
+              className="text-base leading-[1.75] text-white/65 sm:text-lg"
               {...fadeIn(0.14)}
             >
               {subheading}

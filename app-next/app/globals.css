@@ -33,6 +33,9 @@ body {
   background-color: var(--base);
   color: var(--primary);
   @apply antialiased;
+  text-rendering: optimizeLegibility;
+  /* Habilita alternativas tipográficas de Inter para glifos más limpios (incluyendo ñ) */
+  font-feature-settings: "ss01" 1, "cv01" 1, "kern" 1;
 }
 
 h1,
@@ -41,6 +44,8 @@ h3,
 h4 {
   font-family: var(--font-sora), sans-serif;
   color: var(--primary);
+  /* Evita líneas sueltas y cortes bruscos en español */
+  text-wrap: balance;
 }
 
 a {
@@ -50,6 +55,8 @@ a {
 p {
   color: var(--neutral);
   line-height: 1.7;
+  /* Evita palabras sueltas al final del párrafo */
+  text-wrap: pretty;
 }
 
 ::selection {
