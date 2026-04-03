@@ -11,11 +11,6 @@ const examples: QuoteFormValues[] = [
     urgency: "normal",
     budgetValue: 3_500_000,
     extras: ["extra-round"],
-    leadName: "Camila",
-    leadCompany: "Nova Labs",
-    leadContact: "camila@novalabs.co",
-    budgetTarget: "3.500.000",
-    notes: "Lanzamiento en Q2",
   },
   {
     companyType: "pyme",
@@ -26,11 +21,6 @@ const examples: QuoteFormValues[] = [
     urgency: "priority",
     budgetValue: 5_000_000,
     extras: ["priority-support"],
-    leadName: "Andrés",
-    leadCompany: "Merca Plus",
-    leadContact: "+573001112233",
-    budgetTarget: "5.000.000",
-    notes: "Campaña de temporada",
   },
   {
     companyType: "enterprise",
@@ -41,11 +31,6 @@ const examples: QuoteFormValues[] = [
     urgency: "express",
     budgetValue: 12_000_000,
     extras: ["brand-guideline-plus", "priority-support"],
-    leadName: "Sofía",
-    leadCompany: "Lex Capital",
-    leadContact: "sofia@lexcapital.com",
-    budgetTarget: "12.000.000",
-    notes: "Rebranding completo",
   },
 ];
 

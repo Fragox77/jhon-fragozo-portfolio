@@ -174,7 +174,7 @@ export function QuoteSteps({ currentStep }: QuoteStepsProps) {
     <section className="space-y-5">
       <h2 className="text-xl font-semibold text-[var(--primary)]">5. Presupuesto y tiempos de entrega</h2>
       <p className="text-sm text-[var(--neutral)]">
-        Indica el presupuesto aproximado que tienes para este proyecto. Esto nos ayuda a ajustar el alcance de la propuesta.
+        Indica el presupuesto aproximado que tienes para este proyecto. En el siguiente paso te pediremos tus datos para mostrarte el rango final.
       </p>
       <BudgetSlider value={values.budgetValue} onChange={(next) => setValue("budgetValue", next, { shouldValidate: true })} />
       <p className="text-sm text-[var(--neutral)]">

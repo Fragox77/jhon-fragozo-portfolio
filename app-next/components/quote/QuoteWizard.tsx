@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSearchParams } from "next/navigation";
 import { QuoteSteps } from "@/components/quote/QuoteSteps";
 import { ResultPanel } from "@/components/quote/ResultPanel";
+import { LeadCaptureStep, type LeadFormData } from "@/components/quote/LeadCaptureStep";
 import { calculateQuote } from "@/lib/pricing/calculateQuote";
 import { companyLabels, sectorLabels, serviceLabels, urgencyLabels } from "@/lib/pricing/pricingConfig";
 import { loadQuote, saveQuote } from "@/lib/storage/persistQuote";
@@ -21,7 +22,12 @@ const steps = [
   { id: 3, label: "Servicio", fields: ["service"] as Array<keyof QuoteFormValues> },
   { id: 4, label: "Alcance", fields: ["deliverables", "piecesCount", "extras"] as Array<keyof QuoteFormValues> },
   { id: 5, label: "Presupuesto", fields: ["budgetValue", "urgency"] as Array<keyof QuoteFormValues> },
+  { id: 6, label: "Contacto", fields: [] as Array<keyof QuoteFormValues> },
 ];
+
+const LEADS_STORAGE_KEY = "minifolio:leads:v1";
+
+type LeadFormErrors = Partial<Record<keyof LeadFormData, string>>;
 
 export function QuoteWizard() {
   const searchParams = useSearchParams();
@@ -30,8 +36,15 @@ export function QuoteWizard() {
   const [currentStep, setCurrentStep] = useState(1);
   const [mobileSummaryOpen, setMobileSummaryOpen] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
-  const [quoteRequested, setQuoteRequested] = useState(false);
   const [priceUnlocked, setPriceUnlocked] = useState(false);
+  const [submittingLead, setSubmittingLead] = useState(false);
+  const [lead, setLead] = useState<LeadFormData>({
+    name: "",
+    phone: "",
+    email: "",
+    company: "",
+  });
+  const [leadErrors, setLeadErrors] = useState<LeadFormErrors>({});
 
   const resolvedService =
     queryService === "branding" || queryService === "identity" || queryService === "campaign" || queryService === "print"
@@ -52,24 +65,117 @@ export function QuoteWizard() {
 
   const values = form.watch();
   const quote = useMemo(() => calculateQuote(values), [values]);
-  const whatsappUrl = useMemo(() => buildQuoteWhatsappUrl(values, quote), [values, quote]);
+  const whatsappUrl = useMemo(() => buildQuoteWhatsappUrl(values, quote, lead), [values, quote, lead]);
   const mobileWhatsappLabel = values.urgency === "express" ? "Enviar solicitud express" : "Enviar por WhatsApp";
 
   const progress = Math.round((currentStep / steps.length) * 100);
-  const showPrice = priceUnlocked && currentStep === steps.length;
+  const showPrice = priceUnlocked;
+
+  const setLeadField = (field: keyof LeadFormData, value: string) => {
+    setLead((prev) => ({ ...prev, [field]: value }));
+    setLeadErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
+
+  const validateLead = () => {
+    const errors: LeadFormErrors = {};
+    if (lead.name.trim().length < 2) {
+      errors.name = "Ingresa tu nombre.";
+    }
+
+    if (!/^\+?\d{7,15}$/.test(lead.phone.replace(/\s+/g, ""))) {
+      errors.phone = "Ingresa un teléfono válido.";
+    }
+
+    if (lead.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email.trim())) {
+      errors.email = "Ingresa un correo válido.";
+    }
+
+    if (lead.company && lead.company.trim().length < 2) {
+      errors.company = "Ingresa una empresa válida.";
+    }
+
+    setLeadErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const leadIsValid =
+    lead.name.trim().length >= 2 && /^\+?\d{7,15}$/.test(lead.phone.replace(/\s+/g, "")) && (!lead.email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email.trim()));
+
+  const saveLeadLocally = (payload: unknown) => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const raw = window.localStorage.getItem(LEADS_STORAGE_KEY);
+    const current = raw ? (JSON.parse(raw) as unknown[]) : [];
+    current.push(payload);
+    window.localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(current));
+  };
+
+  const buildLeadPayload = () => ({
+    profile: companyLabels[values.companyType],
+    service: serviceLabels[values.service],
+    scope: `${values.deliverables.length} entregables / ${values.piecesCount} piezas`,
+    budget: {
+      target: values.budgetValue,
+      range: {
+        min: quote.min,
+        max: quote.max,
+      },
+    },
+    timeline: urgencyLabels[values.urgency],
+    sector: sectorLabels[values.sector],
+    lead: {
+      name: lead.name.trim(),
+      phone: lead.phone.trim(),
+      email: lead.email.trim(),
+      company: lead.company.trim(),
+    },
+    createdAt: new Date().toISOString(),
+  });
 
   const nextStep = async () => {
+    if (currentStep === steps.length) {
+      if (!validateLead()) {
+        setFeedback("Completa los campos requeridos para continuar.");
+        return;
+      }
+
+      setSubmittingLead(true);
+      const payload = buildLeadPayload();
+      saveLeadLocally(payload);
+
+      try {
+        const response = await fetch("/api/lead", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          setFeedback("Registramos tu lead localmente. No se pudo sincronizar con CRM en este intento.");
+        } else {
+          setFeedback("Lead registrado y resumen enviado. Ahora puedes continuar por WhatsApp.");
+        }
+      } catch {
+        setFeedback("Registramos tu lead localmente. Falló la sincronización remota por conexión.");
+      } finally {
+        setSubmittingLead(false);
+      }
+
+      setPriceUnlocked(true);
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+
     const fields = steps[currentStep - 1].fields;
     const isValid = await form.trigger(fields);
     if (!isValid) {
       return;
     }
     saveQuote(values);
-    if (currentStep === steps.length) {
-      setPriceUnlocked(true);
-      return;
-    }
-
     setCurrentStep((prev) => Math.min(prev + 1, steps.length));
   };
 
@@ -83,7 +189,7 @@ export function QuoteWizard() {
       `Cuéntanos sobre tu negocio: ${companyLabels[values.companyType]}`,
       `¿A qué se dedica tu negocio?: ${sectorLabels[values.sector]}`,
       `Servicio: ${serviceLabels[values.service]}`,
-      `Rango estimado: ${showPrice ? `${formatCOP(quote.min)} - ${formatCOP(quote.max)} COP` : "Disponible al finalizar el paso 5"}`,
+      `Rango estimado: ${showPrice ? `${formatCOP(quote.min)} - ${formatCOP(quote.max)} COP` : "Disponible al finalizar el paso 6"}`,
       `Presupuesto aproximado: ${formatCOP(values.budgetValue)}`,
     ].join("\n");
 
@@ -95,10 +201,28 @@ export function QuoteWizard() {
     }
   };
 
-  const requestPersonalizedQuote = () => {
-    saveQuote(values);
-    setQuoteRequested(true);
-    setFeedback("Tu solicitud fue registrada correctamente.");
+  const downloadSummary = () => {
+    const summary = [
+      "Resumen del cotizador",
+      `Empresa: ${companyLabels[values.companyType]}`,
+      `Sector: ${sectorLabels[values.sector]}`,
+      `Servicio: ${serviceLabels[values.service]}`,
+      `Rango estimado: ${formatCOP(quote.min)} - ${formatCOP(quote.max)} COP`,
+      `Presupuesto objetivo: ${formatCOP(values.budgetValue)} COP`,
+      `Contacto: ${lead.name} - ${lead.phone}`,
+      lead.email ? `Correo: ${lead.email}` : "",
+      lead.company ? `Empresa: ${lead.company}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    const blob = new Blob([summary], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "resumen-cotizacion.txt";
+    anchor.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -121,14 +245,18 @@ export function QuoteWizard() {
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-            <QuoteSteps currentStep={currentStep} />
+            {currentStep < steps.length ? (
+              <QuoteSteps currentStep={currentStep} />
+            ) : (
+              <LeadCaptureStep lead={lead} errors={leadErrors} onChange={setLeadField} />
+            )}
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-3">
                 <SecondaryButton type="button" onClick={previousStep} disabled={currentStep === 1} className="disabled:cursor-not-allowed disabled:opacity-50">
                   Anterior
                 </SecondaryButton>
-                <PrimaryButton type="button" onClick={nextStep}>
-                  {currentStep === steps.length ? "Ver estimación" : "Siguiente"}
+                <PrimaryButton type="button" onClick={nextStep} disabled={(currentStep === steps.length && !leadIsValid) || submittingLead}>
+                  {currentStep === steps.length ? (submittingLead ? "Enviando..." : "Ver estimación y continuar") : "Siguiente"}
                 </PrimaryButton>
               </div>
             </div>
@@ -141,20 +269,10 @@ export function QuoteWizard() {
             budgetValue={values.budgetValue}
             whatsappUrl={whatsappUrl}
             isAdmin={isAdmin}
-            onRequestQuote={requestPersonalizedQuote}
             onCopySummary={copySummary}
+            onDownloadSummary={downloadSummary}
             showPrice={showPrice}
           />
-
-          {quoteRequested && (
-            <section className="rounded-2xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-500/20 dark:bg-blue-950/40">
-              <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100">Gracias por tu interés</h3>
-              <p className="mt-2 text-sm text-blue-800/80 dark:text-blue-200/70">
-                Tu información ha sido enviada correctamente. En breve podrás recibir una propuesta más detallada según las necesidades
-                de tu proyecto.
-              </p>
-            </section>
-          )}
 
           {feedback && <p className="text-sm text-[var(--neutral)]">{feedback}</p>}
         </section>
@@ -205,7 +323,7 @@ export function QuoteWizard() {
                 {formatCOP(quote.min)} - {formatCOP(quote.max)} COP
               </p>
             ) : (
-              <p className="mt-1 text-sm font-semibold text-[var(--primary)]">Completa el paso 5 para ver tu estimación</p>
+              <p className="mt-1 text-sm font-semibold text-[var(--primary)]">Completa el paso 6 para ver tu estimación</p>
             )}
           </div>
           <span className="text-sm font-semibold text-[var(--secondary)]">{mobileSummaryOpen ? "Ocultar" : "Ver"}</span>

@@ -4,8 +4,7 @@ import type { QuoteResult } from "@/lib/pricing/calculateQuote";
 import { getCustomerBenefits, getTimelineByUrgency } from "@/lib/pricing/customerInsights";
 import type { ServiceType, UrgencyType } from "@/lib/pricing/pricingConfig";
 import { formatCOP } from "@/lib/utils/money";
-import { ctaCopy } from "@/lib/constants/cta";
-import { GhostButton, PrimaryButton } from "@/components/ui/Buttons";
+import { GhostButton } from "@/components/ui/Buttons";
 
 type ResultPanelProps = {
   quote: QuoteResult;
@@ -14,8 +13,8 @@ type ResultPanelProps = {
   whatsappUrl: string;
   isAdmin: boolean;
   budgetValue: number;
-  onRequestQuote: () => void;
   onCopySummary: () => void;
+  onDownloadSummary: () => void;
   showPrice: boolean;
 };
 
@@ -26,13 +25,12 @@ export function ResultPanel({
   whatsappUrl,
   isAdmin,
   budgetValue,
-  onRequestQuote,
   onCopySummary,
+  onDownloadSummary,
   showPrice,
 }: ResultPanelProps) {
   const benefits = getCustomerBenefits(service);
   const timeline = getTimelineByUrgency(urgency);
-  const whatsappLabel = urgency === "express" ? "Enviar solicitud express" : "Enviar consulta por WhatsApp";
 
   const budgetMessage =
     budgetValue < quote.min
@@ -53,7 +51,7 @@ export function ResultPanel({
         </>
       ) : (
         <p className="mt-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-3 text-sm text-[var(--neutral)] dark:border-slate-700 dark:bg-slate-900/70">
-          Completa el paso 5 y haz clic en <strong className="text-[var(--primary)]">Ver estimación</strong> para conocer tu rango aproximado en COP.
+          Completa el paso 6 y haz clic en <strong className="text-[var(--primary)]">Ver estimación y continuar</strong> para conocer tu rango aproximado en COP.
         </p>
       )}
 
@@ -79,13 +77,15 @@ export function ResultPanel({
       {showPrice && <p className="mt-4 rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-[var(--neutral)] dark:border-slate-700 dark:bg-slate-900">{budgetMessage}</p>}
 
       <div className="mt-4 flex flex-wrap gap-3">
-        <PrimaryButton type="button" onClick={onRequestQuote} className="px-4 py-2">
-          {ctaCopy.onboardingFinal}
-        </PrimaryButton>
-        {showPrice && <WhatsappButton url={whatsappUrl} label={whatsappLabel} />}
+        {showPrice && <WhatsappButton url={whatsappUrl} label="Continuar por WhatsApp" />}
         {showPrice && (
           <GhostButton type="button" onClick={onCopySummary} className="px-4 py-2">
             Copiar resumen
+          </GhostButton>
+        )}
+        {showPrice && (
+          <GhostButton type="button" onClick={onDownloadSummary} className="px-4 py-2">
+            Descargar resumen
           </GhostButton>
         )}
       </div>

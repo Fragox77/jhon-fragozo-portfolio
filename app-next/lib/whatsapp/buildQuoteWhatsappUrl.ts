@@ -4,21 +4,40 @@ import type { QuoteFormValues } from "@/lib/validation/quoteSchema";
 
 const WHATSAPP_NUMBER = "573043195028";
 
-export const buildQuoteWhatsappUrl = (values: QuoteFormValues, quote: { min: number; max: number }) => {
+type LeadContactData = {
+  name: string;
+  phone: string;
+  email?: string;
+  company?: string;
+};
+
+type BuildMessageInput = {
+  values: QuoteFormValues;
+  quote: { min: number; max: number };
+  lead: LeadContactData;
+};
+
+export const buildWhatsAppMessage = ({ values, quote, lead }: BuildMessageInput) => {
   const lines = [
-    "Hola Jhon, acabo de usar el cotizador de tu sitio web.",
+    `Hola, soy ${lead.name}.`,
+    "Quiero cotizar un proyecto.",
     "",
+    `Perfil: ${companyLabels[values.companyType]}`,
+    `Servicio: ${serviceLabels[values.service]}`,
+    `Alcance: ${values.deliverables.length} entregables y ${values.piecesCount} piezas`,
+    `Presupuesto estimado: ${formatCOP(quote.min)} - ${formatCOP(quote.max)} COP`,
     `Perfil corporativo: ${companyLabels[values.companyType]}`,
     `Sector: ${sectorLabels[values.sector]}`,
-    `Servicio: ${serviceLabels[values.service]}`,
-    "",
-    "Rango estimado:",
-    `${formatCOP(quote.min)} - ${formatCOP(quote.max)} COP`,
-    `Presupuesto aproximado: ${formatCOP(values.budgetValue)}`,
-    "",
-    "Me gustaría recibir una cotización personalizada para este proyecto.",
+    `Presupuesto aproximado: ${formatCOP(values.budgetValue)} COP`,
+    lead.email ? `Mi correo: ${lead.email}` : "",
+    `Mi WhatsApp: ${lead.phone}`,
+    lead.company ? `Empresa: ${lead.company}` : "",
   ];
 
-  const message = lines.join("\n");
+  return lines.filter(Boolean).join("\n");
+};
+
+export const buildQuoteWhatsappUrl = (values: QuoteFormValues, quote: { min: number; max: number }, lead: LeadContactData) => {
+  const message = buildWhatsAppMessage({ values, quote, lead });
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 };
