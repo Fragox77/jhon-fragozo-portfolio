@@ -16,4 +16,5 @@ export const mainNavigation: NavigationItem[] = [
 export const footerNavigation: NavigationItem[] = [
   { href: routes.portfolio, label: "Portafolio" },
   { href: routes.contact, label: "Contacto" },
+  { href: routes.privacy, label: "Privacidad" },
 ];

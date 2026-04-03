@@ -7,6 +7,7 @@ export const routes = {
   contact: "/contacto",
   dashboard: "/dashboard",
   heroComparison: "/hero-comparativa",
+  privacy: "/politica-de-privacidad",
 } as const;
 
 export type RouteValue = (typeof routes)[keyof typeof routes];
