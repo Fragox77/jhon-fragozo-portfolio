@@ -94,11 +94,11 @@ export function HeroSection() {
       />
 
       {/* ── Contenido ─────────────────────────────────────────────────── */}
-      <div className="relative z-10 mx-auto max-w-[1200px] px-4 py-16 sm:py-24 sm:px-6 lg:py-32 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-[1200px] px-4 py-20 sm:py-28 sm:px-6 lg:py-36 lg:px-8">
         <div className="flex flex-col gap-6 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 xl:gap-14">
 
           {/* ── Columna izquierda ─ Contenido ──────────────────────────── */}
-          <div className="max-w-xl space-y-6 lg:max-w-none">
+          <div className="max-w-xl space-y-8 lg:max-w-[540px]">
 
             {/* Badge monochrome premium */}
             <motion.div {...fadeIn(0)}>
@@ -110,7 +110,7 @@ export function HeroSection() {
 
             {/* Título — contraste máximo, jerarquía clara */}
             <motion.h1
-              className="text-3xl font-heading font-semibold leading-[1.1] tracking-[-0.02em] text-white sm:text-4xl lg:text-5xl"
+              className="text-[1.875rem] font-heading font-semibold leading-[1.12] tracking-snug text-white sm:text-4xl sm:tracking-tighter lg:text-[2.75rem]"
               {...fadeIn(0.07)}
             >
               {heading}
@@ -118,14 +118,14 @@ export function HeroSection() {
 
             {/* Descripción */}
             <motion.p
-              className="text-base leading-[1.75] text-white/65 sm:text-lg"
+              className="text-base leading-[1.78] text-white/80 sm:text-[1.0625rem]"
               {...fadeIn(0.14)}
             >
               {subheading}
             </motion.p>
 
             {/* CTAs */}
-            <motion.div className="flex flex-col gap-3 pt-1 sm:flex-row sm:flex-wrap sm:items-center" {...fadeIn(0.21)}>
+            <motion.div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center" {...fadeIn(0.21)}>
               <PrimaryLink href={hero.ctas.primary.href} className="w-full sm:w-auto">
                 {hero.ctas.primary.label}
               </PrimaryLink>

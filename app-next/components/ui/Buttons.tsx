@@ -12,9 +12,9 @@ type ActionButtonProps = ButtonBaseProps & ButtonHTMLAttributes<HTMLButtonElemen
 type ActionLinkProps = ButtonBaseProps & ComponentProps<typeof Link>;
 
 export const buttonBaseClass =
-  "inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-medium tracking-[-0.01em] transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-base";
+  "inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-medium tracking-[-0.01em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-surface-base";
 
-export const primaryButtonClass = "bg-blue-600 text-white hover:bg-blue-500 hover:shadow-[0_0_24px_rgba(37,99,235,0.45)]";
+export const primaryButtonClass = "bg-gradient-to-b from-blue-500 to-blue-600 text-white shadow-md shadow-blue-500/20 hover:brightness-110";
 
 export const secondaryButtonClass =
   "border border-white/20 text-white/80 hover:bg-white/5";
