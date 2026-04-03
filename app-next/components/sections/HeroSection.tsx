@@ -46,11 +46,15 @@ export function HeroSection() {
   const { hero } = homeContent;
 
   const heading =
-    "Diseño de marca y soluciones digitales para empresas que quieren crecer con una presencia más sólida, moderna y estratégica.";
+    "Diseñamos marcas y experiencias digitales que convierten visitantes en clientes.";
   const subheading =
-    "Combino branding, diseño web y herramientas digitales para construir marcas claras, sistemas visuales consistentes y experiencias digitales orientadas a negocio.";
+    "Estrategia, diseño y tecnología integrados para que tu marca comunique con claridad, genere confianza y crezca de forma sostenible.";
 
-  const proofChips = ["120+ proyectos desarrollados", "14 sectores atendidos"];
+  const proofChips = [
+    "120+ proyectos desarrollados",
+    "14 sectores atendidos",
+    "Enfoque estratégico",
+  ];
 
   const progressBars = [
     { label: "Branding",  pct: "82%", bar: "bg-blue-500" },
@@ -104,13 +108,13 @@ export function HeroSection() {
             <motion.div {...fadeIn(0)}>
               <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-4 py-1.5 text-xs font-medium tracking-wide text-white/60 backdrop-blur-sm">
                 <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-                Estrategia digital para marcas en crecimiento
+                Estrategia, diseño y tecnología para empresas en crecimiento
               </span>
             </motion.div>
 
             {/* Título — contraste máximo, jerarquía clara */}
             <motion.h1
-              className="text-[1.875rem] font-heading font-semibold leading-[1.12] tracking-snug text-white sm:text-4xl sm:tracking-tighter lg:text-[2.75rem]"
+              className="text-[1.875rem] font-heading font-semibold leading-[1.12] tracking-snug text-white sm:text-[2.25rem] sm:tracking-tighter lg:text-[2.625rem]"
               {...fadeIn(0.07)}
             >
               {heading}
@@ -125,17 +129,22 @@ export function HeroSection() {
             </motion.p>
 
             {/* CTAs */}
-            <motion.div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center" {...fadeIn(0.21)}>
-              <PrimaryLink href={hero.ctas.primary.href} className="w-full sm:w-auto">
-                {hero.ctas.primary.label}
-              </PrimaryLink>
-              <SecondaryLink href={hero.ctas.secondary.href} className="w-full sm:w-auto">
-                {hero.ctas.secondary.label}
-              </SecondaryLink>
+            <motion.div className="flex flex-col gap-3 pt-2" {...fadeIn(0.21)}>
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                <PrimaryLink href={hero.ctas.primary.href} className="w-full sm:w-auto">
+                  {hero.ctas.primary.label}
+                </PrimaryLink>
+                <SecondaryLink href={hero.ctas.secondary.href} className="w-full sm:w-auto">
+                  {hero.ctas.secondary.label}
+                </SecondaryLink>
+              </div>
+              <p className="text-xs text-white/40">
+                Recibe una estimación en menos de 2 minutos
+              </p>
             </motion.div>
 
-            {/* Social proof chips con icono — ocultos en mobile para reducir ruido visual */}
-            <motion.div className="hidden flex-wrap items-center gap-2.5 sm:flex" {...fadeIn(0.28)}>
+            {/* Social proof chips con icono */}
+            <motion.div className="flex flex-wrap items-center gap-2" {...fadeIn(0.28)}>
               {proofChips.map((label) => (
                 <span
                   key={label}
