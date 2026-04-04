@@ -1,6 +1,28 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+// Rate limiter en memoria: máx 5 envíos por IP cada 10 minutos
+const RATE_LIMIT = 5;
+const WINDOW_MS = 10 * 60 * 1000;
+const ipHits = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = ipHits.get(ip);
+
+  if (!entry || now > entry.resetAt) {
+    ipHits.set(ip, { count: 1, resetAt: now + WINDOW_MS });
+    return false;
+  }
+
+  if (entry.count >= RATE_LIMIT) {
+    return true;
+  }
+
+  entry.count += 1;
+  return false;
+}
+
 const leadPayloadSchema = z.object({
   profile: z.string().min(1),
   service: z.string().min(1),
@@ -74,6 +96,11 @@ const sendConfirmationEmail = async (payload: LeadPayload) => {
 };
 
 export async function POST(request: Request) {
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429 });
+  }
+
   const body: unknown = await request.json();
   const parsed = leadPayloadSchema.safeParse(body);
 
