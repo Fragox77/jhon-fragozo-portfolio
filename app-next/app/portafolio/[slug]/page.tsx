@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
@@ -61,7 +62,20 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </Section>
 
-      <Section className="pb-20 pt-0">
+      <Section className="pb-4 pt-0">
+        <div className="relative h-64 w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800 md:h-80 lg:h-96">
+          <Image
+            src={project.heroBanner}
+            alt={project.name}
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 1280px) 100vw, 1200px"
+          />
+        </div>
+      </Section>
+
+      <Section className="pb-20 pt-6">
         <div className="grid gap-6 lg:grid-cols-3">
 
           {/* Columna principal */}

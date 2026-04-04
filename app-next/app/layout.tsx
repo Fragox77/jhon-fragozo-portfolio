@@ -56,11 +56,13 @@ export const metadata: Metadata = {
     siteName: brand.name,
     title: siteContent.metadata.title,
     description: siteContent.metadata.description,
+    images: [{ url: "/images/og/og-default.jpg", width: 1200, height: 630, alt: `${brand.name} — Brand Designer` }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: siteContent.metadata.title,
     description: siteContent.metadata.description,
+    images: ["/images/og/og-default.jpg"],
   },
   robots: {
     index: true,

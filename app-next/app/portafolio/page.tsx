@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
@@ -37,7 +38,17 @@ export default function PortafolioPage() {
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {projects.map((project) => (
             <Link key={project.slug} href={`/portafolio/${project.slug}`} className="group block">
-              <Card hoverable className="h-full p-5 transition-shadow group-hover:shadow-card md:p-6">
+              <Card hoverable className="h-full overflow-hidden p-0 transition-shadow group-hover:shadow-card">
+                <div className="relative h-48 w-full bg-slate-100 dark:bg-slate-800">
+                  <Image
+                    src={project.thumbnail}
+                    alt={project.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="p-5 md:p-6">
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {project.tags.map((tag) => (
                     <span
@@ -55,6 +66,7 @@ export default function PortafolioPage() {
                   <span className="font-medium text-[var(--secondary)] group-hover:underline underline-offset-2">
                     Ver caso →
                   </span>
+                </div>
                 </div>
               </Card>
             </Link>

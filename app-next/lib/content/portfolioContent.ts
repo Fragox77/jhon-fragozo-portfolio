@@ -11,6 +11,10 @@ export type PortfolioProject = {
   solution: string;
   results: string[];
   deliverables: string[];
+  /** Imagen de tarjeta en el listado — 800×500 px */
+  thumbnail: string;
+  /** Imagen hero en el case study — 1200×675 px */
+  heroBanner: string;
 };
 
 export type PortfolioContent = {
@@ -54,6 +58,8 @@ export const portfolioContent: PortfolioContent = {
         "Plantillas para presentaciones",
         "Manual de marca (PDF)",
       ],
+      thumbnail: "/images/portfolio/firma-legal-thumb.jpg",
+      heroBanner: "/images/portfolio/firma-legal-hero.jpg",
     },
     {
       slug: "retail-digital",
@@ -77,6 +83,8 @@ export const portfolioContent: PortfolioContent = {
         "Guía de tono visual y jerarquía de mensaje",
         "Archivos editables en Figma",
       ],
+      thumbnail: "/images/portfolio/retail-digital-thumb.jpg",
+      heroBanner: "/images/portfolio/retail-digital-hero.jpg",
     },
     {
       slug: "startup-tech",
@@ -102,6 +110,8 @@ export const portfolioContent: PortfolioContent = {
         "Landing page de lanzamiento",
         "Manual de marca digital",
       ],
+      thumbnail: "/images/portfolio/startup-tech-thumb.jpg",
+      heroBanner: "/images/portfolio/startup-tech-hero.jpg",
     },
     {
       slug: "pyme-corporativa",
@@ -126,6 +136,8 @@ export const portfolioContent: PortfolioContent = {
         "Señalética y material de oficina",
         "Manual de marca con guía de uso práctico",
       ],
+      thumbnail: "/images/portfolio/pyme-corporativa-thumb.jpg",
+      heroBanner: "/images/portfolio/pyme-corporativa-hero.jpg",
     },
   ],
 };
