@@ -29,7 +29,7 @@ export default function PortafolioPage() {
         </div>
       </Section>
 
-      <Section className="bg-slate-50 pt-0 dark:bg-slate-900">
+      <Section className="bg-slate-50 pt-8 pb-20 dark:bg-slate-900">
         <SectionTitle
           title={portfolioContent.sectionTitle}
           description={portfolioContent.sectionDescription}

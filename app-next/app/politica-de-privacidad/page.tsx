@@ -30,7 +30,7 @@ export default function PoliticaDePrivacidadPage() {
         </Card>
       </Section>
 
-      <Section className="pb-20">
+      <Section className="pt-0 pb-20">
         <div className="prose prose-slate mx-auto max-w-3xl dark:prose-invert">
           <div className="space-y-10 text-brand-neutral">
 
