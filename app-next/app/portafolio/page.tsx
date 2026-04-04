@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
+import { Card } from "@/components/ui/Card";
+import { Section } from "@/components/ui/Section";
+import { SectionTitle } from "@/components/ui/SectionTitle";
+import { portfolioContent } from "@/lib/content/portfolioContent";
 
 export const metadata: Metadata = {
   title: "Portafolio",
@@ -7,10 +12,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/portafolio" },
   openGraph: { url: "/portafolio", title: "Portafolio | Jhon Fragozo" },
 };
-import { Card } from "@/components/ui/Card";
-import { Section } from "@/components/ui/Section";
-import { SectionTitle } from "@/components/ui/SectionTitle";
-import { portfolioContent } from "@/lib/content/portfolioContent";
 
 const projects = portfolioContent.projects ?? [];
 
@@ -35,10 +36,28 @@ export default function PortafolioPage() {
 
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {projects.map((project) => (
-            <Card key={project.name} hoverable className="p-5 md:p-6">
-              <h2 className="text-body-lg font-semibold text-brand-primary">{project.name}</h2>
-              <p className="mt-2 text-body text-brand-neutral">{project.summary}</p>
-            </Card>
+            <Link key={project.slug} href={`/portafolio/${project.slug}`} className="group block">
+              <Card hoverable className="h-full p-5 transition-shadow group-hover:shadow-card md:p-6">
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-slate-200 px-2.5 py-0.5 text-caption text-brand-neutral dark:border-slate-700"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h2 className="text-body-lg font-semibold text-brand-primary">{project.name}</h2>
+                <p className="mt-2 text-body text-brand-neutral">{project.summary}</p>
+                <div className="mt-4 flex items-center justify-between text-small text-slate-500">
+                  <span>{project.sector}</span>
+                  <span className="font-medium text-[var(--secondary)] group-hover:underline underline-offset-2">
+                    Ver caso →
+                  </span>
+                </div>
+              </Card>
+            </Link>
           ))}
         </div>
       </Section>
