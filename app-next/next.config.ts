@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const isProduction = process.env.NODE_ENV === "production";
-const deploymentBasePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/minifolio").replace(/\/$/, "");
+const deploymentBasePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/jhon-fragozo-portfolio").replace(/\/$/, "");
 const basePath = isProduction ? deploymentBasePath : "";
 
 const nextConfig: NextConfig = {

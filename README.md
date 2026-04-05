@@ -67,12 +67,12 @@ Flujo:
 Detalles técnicos:
 
 - `next.config.ts` usa `output: "export"`
-- En producción aplica `basePath` y `assetPrefix` (default `/minifolio`)
+- En producción aplica `basePath` y `assetPrefix` (default `/jhon-fragozo-portfolio`)
 - Se crea `.nojekyll` para compatibilidad con assets `_next`
 
 URL pública:
 
-- https://comunicaciones2-star.github.io/minifolio/
+- https://Fragox77.github.io/jhon-fragozo-portfolio/
 
 ## Qué es legado y qué es actual
 
@@ -115,6 +115,6 @@ npm run build
 
 ## Enlaces
 
-- Repo: https://github.com/comunicaciones2-star/minifolio
-- Actions: https://github.com/comunicaciones2-star/minifolio/actions
-- Sitio: https://comunicaciones2-star.github.io/minifolio/
+- Repo: https://github.com/Fragox77/jhon-fragozo-portfolio
+- Actions: https://github.com/Fragox77/jhon-fragozo-portfolio/actions
+- Sitio: https://Fragox77.github.io/jhon-fragozo-portfolio/

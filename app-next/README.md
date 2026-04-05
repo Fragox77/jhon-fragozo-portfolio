@@ -1,15 +1,15 @@
 # app-next
 
-[![Deploy app-next to GitHub Pages](https://github.com/comunicaciones2-star/minifolio/actions/workflows/deploy-app-next-pages.yml/badge.svg)](https://github.com/comunicaciones2-star/minifolio/actions/workflows/deploy-app-next-pages.yml)
+[![Deploy app-next to GitHub Pages](https://github.com/Fragox77/jhon-fragozo-portfolio/actions/workflows/deploy-app-next-pages.yml/badge.svg)](https://github.com/Fragox77/jhon-fragozo-portfolio/actions/workflows/deploy-app-next-pages.yml)
 
 Nueva versión del sitio en Next.js + React + TypeScript + Tailwind, sin afectar la versión estática actual.
 
-URL pública (GitHub Pages): https://comunicaciones2-star.github.io/minifolio/
+URL pública (GitHub Pages): https://Fragox77.github.io/jhon-fragozo-portfolio/
 
 Con el workflow actual, conviven ambas versiones:
 
-- Sitio legacy (raíz): `https://comunicaciones2-star.github.io/minifolio/`
-- Cotizador Next.js: `https://comunicaciones2-star.github.io/minifolio/cotizador/`
+- Sitio legacy (raíz): `https://Fragox77.github.io/jhon-fragozo-portfolio/`
+- Cotizador Next.js: `https://Fragox77.github.io/jhon-fragozo-portfolio/cotizador/`
 
 ## Requisitos
 
@@ -45,13 +45,13 @@ Con `output: 'export'`, Next genera el sitio estático en `app-next/out`.
 
 `next.config.ts` usa por defecto:
 
-- `basePath: '/minifolio'`
-- `assetPrefix: '/minifolio/'`
+- `basePath: '/jhon-fragozo-portfolio'`
+- `assetPrefix: '/jhon-fragozo-portfolio/'`
 
 Si necesitas otro repo/path, puedes sobrescribirlo por variable de entorno:
 
 ```bash
-NEXT_PUBLIC_BASE_PATH=/minifolio npm run build
+NEXT_PUBLIC_BASE_PATH=/jhon-fragozo-portfolio npm run build
 ```
 
 ## Probar el motor de pricing (3 ejemplos)
@@ -74,5 +74,5 @@ npm run test:pricing
 2. Verificar que se genere `app-next/out` sin errores.
 3. Hacer push a `main`.
 4. Revisar workflow **Deploy app-next to GitHub Pages** en Actions.
-5. Validar sitio publicado: https://comunicaciones2-star.github.io/minifolio/
-6. Probar ruta clave: https://comunicaciones2-star.github.io/minifolio/cotizador/
+5. Validar sitio publicado: https://Fragox77.github.io/jhon-fragozo-portfolio/
+6. Probar ruta clave: https://Fragox77.github.io/jhon-fragozo-portfolio/cotizador/
