@@ -95,12 +95,12 @@ export default async function CaseStudyPage({ params }: Props) {
               </Card>
 
               {project.solutionImage && (
-                <div className="relative h-64 w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800 md:h-80">
+                <div className="relative w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800" style={{ aspectRatio: "8/5" }}>
                   <Image
                     src={assetPath(project.solutionImage)}
                     alt={`${project.name} — detalle de la solución`}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     sizes="(max-width: 1024px) 100vw, 800px"
                   />
                 </div>
