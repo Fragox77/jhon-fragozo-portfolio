@@ -150,7 +150,7 @@ function CTAs() {
 function TrustStrip() {
   const items = [
     "+30 proyectos entregados",
-    "5 años de experiencia",
+    "15 años de experiencia",
     "Enfoque B2B",
   ];
   return (
