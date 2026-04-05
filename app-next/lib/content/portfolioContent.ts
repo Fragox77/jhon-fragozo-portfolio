@@ -104,6 +104,7 @@ export const portfolioContent: PortfolioContent = {
       ],
       thumbnail: "/images/portfolio/gold-vision-thumb.jpg",
       heroBanner: "/images/portfolio/gold-vision-hero.jpg",
+      solutionImage: "/images/portfolio/gold-vision-solution.jpg",
     },
     {
       slug: "igloos-ice-granizados",
@@ -131,6 +132,7 @@ export const portfolioContent: PortfolioContent = {
       ],
       thumbnail: "/images/portfolio/igloos-ice-thumb.jpg",
       heroBanner: "/images/portfolio/igloos-ice-hero.jpg",
+      solutionImage: "/images/portfolio/igloos-ice-solution.jpg",
     },
     {
       slug: "onix-black",
