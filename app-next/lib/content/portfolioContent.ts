@@ -160,6 +160,7 @@ export const portfolioContent: PortfolioContent = {
       ],
       thumbnail: "/images/portfolio/onix-black-thumb.jpg",
       heroBanner: "/images/portfolio/onix-black-hero.jpg",
+      solutionImage: "/images/portfolio/onix-black-solution.jpg",
     },
     {
       slug: "remti-remote-iot",
