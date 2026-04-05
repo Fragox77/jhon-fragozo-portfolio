@@ -190,6 +190,7 @@ export const portfolioContent: PortfolioContent = {
       ],
       thumbnail: "/images/portfolio/remti-thumb.jpg",
       heroBanner: "/images/portfolio/remti-hero.jpg",
+      solutionImage: "/images/portfolio/remti-solution.jpg",
     },
     {
       slug: "talu-cuidado-capilar",
